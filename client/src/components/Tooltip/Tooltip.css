@@ -1,0 +1,39 @@
+.tooltip{   
+    position: relative;
+}  
+
+.tooltip-content{
+    position: absolute;
+    display: none;
+    bottom: -28px;
+    right: -5px;
+    font-size: var(--font-ms);
+    background-color: var(--border-strong);
+    padding: var(--space-1) var(--space-5);
+    border-radius: 5px;
+
+}
+
+.tooltip-content::after{
+    content: "";
+    position: absolute;
+    height: 0;
+    width: 0;
+    background-color: black;
+    top: -5px;
+    right: 3px;
+    border-bottom-color: var(--border-strong);
+    border: 5px solid transparent;
+    display: block;
+
+}
+
+.tooltip-trigger{
+    display: flex;
+}
+
+
+
+.tooltip-trigger:hover ~ .tooltip-content{
+    display: block;
+}

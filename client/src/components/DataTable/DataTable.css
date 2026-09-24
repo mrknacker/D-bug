@@ -1,0 +1,30 @@
+.data-table{
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+.data-table-header{
+    font-size: var(--font-sm);
+}
+
+.data-table-head{
+    color: var(--text-primary);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.data-table-row{
+    color: var(--text-primary);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.data-table-row:hover{
+    background-color: #161a1e;
+}
+
+.data-table-data{
+    color: var(--text-tertiary);
+    font-size: var(--font-ms);
+}

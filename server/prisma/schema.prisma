@@ -1,0 +1,207 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+/// MODELS
+
+////// Subscription MODEL
+
+enum SubscriptionPlan{
+  BASIC
+  PRO
+}
+
+model Plan{
+  id              String              @id        @default(cuid())  
+  plan            SubscriptionPlan               @default(BASIC)
+  price           Int    
+  users           User[]
+}
+
+////// User MODEL
+
+model User{
+  id                 String                     @id        @default(cuid())  
+  name               String        
+  email              String                     @unique
+  passwordHash       String   
+  planId             String?
+  plan               Plan?                      @relation(fields:[planId], references: [id])  
+  ownedOrganizations Organization[]             @relation("OrganizationOwner")
+  memberships        Member[]                   @relation("Membership")
+  reportedBugs       Bug[]                      @relation("ReportedBugs")             
+}
+
+
+///// Team MODEL
+
+enum TeamStatus{
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+model Team{
+  id              String        @id        @default(cuid())
+  name            String        @unique  
+  description     String?
+  status          TeamStatus         @default(ACTIVE)
+  members         Member[]
+  projects        Project[]
+  organizationId   String
+  organization     Organization      @relation(fields: [organizationId], references: [id])
+}
+
+
+//////// Member MODEL
+
+model Member{
+  id          String     @id     @default(cuid())
+  userId      String     
+  user        User       @relation("Membership", fields:[userId], references:[id])
+  teamId      String
+  teams       Team[]
+  bugComments BugComment[]
+  assignedBugs    Bug[]     @relation("AssignedBugs")
+  organizationId    String      
+  organization      Organization     @relation("OrganizationMembers", fields: [organizationId], references: [id])
+  projectId      String 
+  project     Project           @relation("ProjectMembers", fields: [projectId], references: [id])
+
+  @@unique([teamId, userId])
+}
+
+//////// Organization MODEL
+
+enum OrganizationStatus{
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+model Organization{
+  id              String        @id        @default(cuid())
+  name            String        @unique
+  description     String?  
+  status          OrganizationStatus
+  logoURL         String        @unique
+  teams           Team[]
+  ownerId         String
+  owner           User          @relation("OrganizationOwner", fields:[ownerId], references:[id]) 
+  members         Member[]      @relation("OrganizationMembers")
+
+}
+
+
+//////// Project MODEL
+
+
+enum ProjectStatus{
+  ACTIVE
+  INACTIVE
+  DELETED
+}
+
+model ProjectLabel{
+  id                String    @id    @default(cuid())
+  label             String    
+  projectId         String    
+  project           Project   @relation(fields:[projectId], references:[id])
+}
+
+model Project{
+  id                String    @id       @default(cuid())
+  name              String    
+  description       String?
+  status            ProjectStatus       @default(ACTIVE)
+  labels            ProjectLabel[]
+  members           Member[]      @relation("ProjectMembers")                
+  teamId            String
+  team              Team        @relation(fields:[teamId], references: [id])          
+} 
+
+////////// Bug MODEL
+
+enum BugStatus{
+  OPEN
+  IN_PROGRESS
+  IN_REVIEW
+  RESOLVED
+  REOPENED
+}
+
+enum BugPriority{
+  P1
+  P2
+  P3
+  P4
+}
+
+enum BugSeverity{
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model BugTag{
+  id          String             @id    @default(cuid())
+  tag         String
+  bugId       String
+  bug         Bug               @relation(fields:[bugId], references:[id])
+}
+
+model BugComment{
+  id          String            @id     @default(cuid())
+  comment     String
+  authorId    String 
+  author      Member            @relation(fields:[authorId], references: [id])
+  bugId       String
+  bug         Bug               @relation(fields: [bugId], references: [id])      
+}
+
+model BugAttachment{
+  id          String            @id     @default(cuid())
+  fileURL     String        
+  fileSize    BigInt
+  fileType    String
+  fileName    String
+  bugId       String
+  bug         Bug               @relation(fields: [bugId], references: [id])      
+}
+
+
+model Bug{
+  id               String            @id   @default(cuid())
+  title            String
+  description      String?
+  status           BugStatus         @default(OPEN)
+  severity         BugSeverity       @default(LOW)
+  priority         BugPriority       @default(P4)
+  assigneeId       String?     
+  assignee         Member?            @relation("AssignedBugs", fields:[assigneeId], references:[id])    
+  reporterId       String 
+  reporter         User              @relation("ReportedBugs", fields:[reporterId], references:[id]) 
+  tags             BugTag[]
+  projectId        String
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          
+  stepsToReproduce String[]
+  expectedResult   String
+  actualResult     String
+  stackTrace       String
+  environment      String
+  comments      BugComment[]
+  attachments   BugAttachment[]
+}

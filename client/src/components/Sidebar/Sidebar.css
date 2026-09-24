@@ -1,0 +1,131 @@
+.sidebar{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-strong);
+    justify-content: space-between;
+    overflow-x: clip;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+}
+
+.sidebar-header{
+    padding: var(--padding-card);
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.sidebar-footer{
+    border-top: 1px solid var(--border-strong);
+    padding: var(--space-4);
+
+}
+
+.sidebar-footer h3{
+    color:var(--text-primary);
+    font-weight: 600;
+    font-size: var(--font-sm);
+}
+
+.sidebar-footer p{
+    color:var(--text-secondary);
+    font-weight: 400;
+    font-size: var(--font-ms);
+}
+
+.sidebar-footer-menu-trigger{
+    padding: var(--space-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.sidebar-footer-menu-trigger:hover, .sidebar-footer-menu-trigger:focus{
+    background-color: var(--border-dark);
+    transition: all 0.4s ease-in-out;
+    scale: 0.98;
+
+}
+
+.sidebar-logo{
+    width: clamp(5rem, 5vw, 7rem);
+    height: auto;
+}
+
+
+.sidebar-main{
+    padding-inline: var(--padding-card);
+    padding-block: var(--padding-card);
+    display: flex;
+    justify-content: start;
+    gap: var(--gap-lg);
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.sidebar-links-container{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.organization-links{
+    display: flex;
+    gap: var(--gap-xs);
+    flex-direction: column;
+
+}
+
+
+.organization-item{
+    align-items: center;
+    display: flex;
+    justify-content: start;
+    color: var(--text-secondary-dark);
+    gap: var(--gap-sm);
+    font-size: var(--font-ms);
+    cursor: pointer;
+}
+
+.organization-item:hover, .organization-item:focus{
+    background-color: var(--red-glow-softer);
+    transform: translateX(3px);
+    transition: transform 0.4s ease-in-out, color 0.1s ease-in-out;
+    color: var(--primary);
+}
+
+.navbar-icon{
+    color: var(--text-primary);
+}
+
+.navbar-icon:hover, 
+.navbar-icon:focus{
+
+    color: var(--primary);
+    transition: all 0.3s ease-in-out;
+
+}
+
+.collapsible-menu-trigger{
+    align-self: start;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    color: var(--text-tertiary);
+    font-size: var(--font-xs);
+    font-weight: 700;
+    
+}
+
+.collapsible-menu-trigger:hover {
+
+    color: #5dc9b0;
+    transition: all 0.3s ease-in-out; 
+}
+
