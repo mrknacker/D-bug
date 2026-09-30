@@ -1,0 +1,32 @@
+.show-icon-btn{
+    padding: var(--space-1) var(--space-3) ;
+    color: var(--text-primary);
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-xs);
+    border-radius: 5px;
+    border: 1px solid var(--text-disabled);
+    font-size: var(--font-ms);
+    display: flex;
+    background-color: var(--border-strong);
+
+}
+
+.team-icon{
+    padding: var(--space-1);
+}
+
+.team-icon:hover, .team-icon:focus{
+    background-color: var(--text-disabled-dark);
+}
+
+
+.icon-container{
+    padding: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    color: var(--text-primary);
+    height: 100%;
+    width: 100%;
+    gap: var(--gap-sm);
+}

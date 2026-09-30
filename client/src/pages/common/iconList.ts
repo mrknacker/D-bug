@@ -66,7 +66,7 @@ import {
     Calendar,
 } from "lucide-react";
 
-export const TEAM_ICONS = [
+export const icons = [
     { id: "bug", label: "Bug", icon: Bug },
     { id: "bug-off", label: "Bug Fixing", icon: BugOff },
     { id: "security", label: "Security", icon: ShieldAlert },

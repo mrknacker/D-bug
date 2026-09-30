@@ -3,11 +3,15 @@ import type {Subscription} from "../subscription/subscription"
 export interface User{
     id: string;
     name: string;
-    email: string;
+    emailAddress: string;
     createdAt: string;
-    passwordHash: string;
+    password: string;
     isActive: boolean;
     subscription: Subscription;
 };
 
-export type createUser = Pick<User, "name" |  "email" | "passwordHash">
+export type CreateNewUser = Pick<User, "name" |  "emailAddress" | "password">
+
+export type CreateNewUserResponse = Pick<User, "name" |  "emailAddress" | "id">
+
+export type LoginUser = Pick<User, "emailAddress" | "password">

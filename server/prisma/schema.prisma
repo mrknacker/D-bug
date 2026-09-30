@@ -34,8 +34,8 @@ model Plan{
 model User{
   id                 String                     @id        @default(cuid())  
   name               String        
-  email              String                     @unique
-  passwordHash       String   
+  emailAddress       String                     @unique
+  password           String   
   planId             String?
   plan               Plan?                      @relation(fields:[planId], references: [id])  
   ownedOrganizations Organization[]             @relation("OrganizationOwner")
@@ -94,8 +94,8 @@ model Organization{
   id              String        @id        @default(cuid())
   name            String        @unique
   description     String?  
-  status          OrganizationStatus
-  logoURL         String        @unique
+  status          OrganizationStatus       @default(ACTIVE)
+  logoURL         String?        @unique
   teams           Team[]
   ownerId         String
   owner           User          @relation("OrganizationOwner", fields:[ownerId], references:[id]) 

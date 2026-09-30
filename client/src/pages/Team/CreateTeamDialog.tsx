@@ -1,4 +1,4 @@
-import { LoaderCircle, MoveRight, Plus, X } from "lucide-react"
+import { ChevronDown, ChevronRight, ChevronsUpDown, ChevronUp, Home, Info, LoaderCircle, MoveRight, Package, PackageOpen, Plus, X } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -18,19 +18,26 @@ import type { FormStatus } from "../types/form"
 import {toast} from "sonner"
 import {createTeam} from "../../api/team"
 import React from "react"
-
+import { icons } from "../common/iconList"
+import IconCard from "../../components/IconCard/IconCard"
 
 const CreateTeamDialog = ({openTrigger}) => {
-
     
+    /* UI state */
+
     let teamNameMaxLength = 50;
     let teamDescriptionMaxLength = 300;
+
     const [error, setError] = useState<string>("")
     const [message, setMessage] = useState<string>("")
+
+
     const [formData, setFormData] = useState<CreateTeamProps>({
         name: "",
-        description : ""
+        description : "",
+        icon: ""
     })
+
 
     const [formStatus, setFormStatus] = useState<FormStatus>("idle")
 
@@ -38,8 +45,7 @@ const CreateTeamDialog = ({openTrigger}) => {
      
     const validateFormData = (formData: CreateTeamProps) : boolean => {
 
-        if(!formData.name.trim()){
-            setFormStatus("idle")
+        if(formData.name.length === 0){
             setError("Team name is required")
             return false;
         }
@@ -52,19 +58,16 @@ const CreateTeamDialog = ({openTrigger}) => {
     
        try{ 
         setFormStatus("submitted");
-        console.log("Setting isCreating to true")
-
 
         /* VALIDATING  */
-     
-        if(!validateFormData(formData)) return;
-
-        console.log("Creating the team")
-        const team = await createTeam(formData)
-        console.log("Created the team")
-        console.log(team);
+        if(!validateFormData(formData)){ 
+          setFormStatus("error");
+            return;
+        };
         
-        console.log("Set formstatus -> submitted")
+    
+        const team = await createTeam(formData)
+        
         setFormStatus("success");
         
         return team;
@@ -74,22 +77,8 @@ const CreateTeamDialog = ({openTrigger}) => {
         console.log(error)
         toast.error(error.response?.data?.message || "Something went wrong" )
 
-    }finally{
-        setError("")
-        setFormStatus("idle")
-        setFormData(prev => (
-            {...prev, 
-                name: "",
-                description: ""
-            }
-        ))
-    }
-        
-    }
+    } }
 
-    console.log(error)
-
-    console.log(formData)
  
   return (
     <Dialog >
@@ -135,7 +124,7 @@ const CreateTeamDialog = ({openTrigger}) => {
                         placeholder="Frontend" 
                         className="form-input" 
                         value={formData.name}
-                        required
+                        maxLength={teamNameMaxLength}      
                         onChange={(e) => {
                             setError("")
                             setFormData(prev => (
@@ -144,7 +133,7 @@ const CreateTeamDialog = ({openTrigger}) => {
                             }
                             ))
                         }}
-                        maxLength={teamNameMaxLength}
+                 
                         />
                         {error && <p className="input-error">
                             {error}
@@ -157,11 +146,11 @@ const CreateTeamDialog = ({openTrigger}) => {
                         )
                         }
                     </div>
-
+                
                         {/* TEAM Description INPUT */}
                     <div className="label-input-group">
                         <label className="form-input-label">
-                            Description (Optional)
+                            Description <span className="text-gray-500"> (Optional)</span>
                         </label>
                         <Textarea 
                         value={formData.description}
@@ -184,31 +173,7 @@ const CreateTeamDialog = ({openTrigger}) => {
                         }
                     </div>
 
-                          {/* TEAM Description INPUT */}
-                    <div className="label-input-group">
-                        <label className="form-input-label">
-                            Description (Optional)
-                        </label>
-                        <Textarea 
-                        value={formData.description}
-                        onChange={(e) => {
-                            setFormData(prev => (
-                            {   ...prev,
-                            description: e.target.value
-                            }
-                            ))
-                        }}
-                        className="form-input"
-                        maxLength={teamDescriptionMaxLength}
-                        />
-                        {formData.description && 
-                        (
-                        <p className="input-info">
-                            { teamDescriptionMaxLength - (formData.description?.length)} characters remaining
-                        </p>
-                        )
-                        }
-                    </div>
+
 
                 </section>
                 
@@ -236,8 +201,6 @@ const CreateTeamDialog = ({openTrigger}) => {
                     <button 
                     type="submit"
                     className="submit-btn flex gap-[var(--gap-sm)] items-center justify-center"
-                    disabled={formStatus === "submitted"}
-
                     >
                         {formStatus === "submitted" ? (
                             <>

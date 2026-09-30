@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Organization" ALTER COLUMN "status" SET DEFAULT 'ACTIVE',
+ALTER COLUMN "logoURL" DROP NOT NULL;

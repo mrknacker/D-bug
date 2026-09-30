@@ -1,3 +1,5 @@
+import type {LucideIcon} from "lucide-react"
+
 export type TeamStatus = 
     | "active"
     | "inactive"
@@ -12,4 +14,6 @@ export interface Team{
     projects?: string[];
 }
 
-export type CreateTeamProps = Pick<Team, "name" | "description">
+export type CreateTeamRequestProps = Pick<Team, "name" | "description" |>
+
+export type CreateTeamResponse = Pick<Team, "id" | "name" | "description">

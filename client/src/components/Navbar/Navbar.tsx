@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import DarkLogo from "../assets/DarkLogo.png"
+import DarkLogo from "../../assets/DarkLogo.png"
 import "./Navbar.css"
 
 const Navbar = () => {
@@ -9,8 +9,8 @@ const Navbar = () => {
             <img src={DarkLogo} alt="logo" className="logo"/>
         </Link>
 
-        <Link to="/dashboard" className="dashboard-btn">
-            Dashboard
+        <Link to="/auth/sign-up" className="dashboard-btn">
+            Sign up
         </Link>
     </div>
   )

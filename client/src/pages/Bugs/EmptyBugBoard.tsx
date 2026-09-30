@@ -1,5 +1,5 @@
 import { BugOff, Plus } from "lucide-react"
-import "./Bugs.css"
+import "./BugBoard.css"
 
 const EmptyBugBoard = () => {
   return (
@@ -11,8 +11,7 @@ const EmptyBugBoard = () => {
             Looks like the bugs took a day off.
         </h2>
         <p className="empty-state-description">
-            Nothing to triage right now. <br></br>
-            New bugs will crawl in here when they're reported.
+            New bugs will crawl in here as they're reported.
         </p>
         </div>
 

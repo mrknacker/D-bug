@@ -50,6 +50,7 @@ export type BugCardData = Pick<
 
 export type BugCardProps = {
     bug: BugCardData;
+    setDraggedCard: React.Dispatch<React.SetStateAction<BugCardData | null>>
 }
 
 

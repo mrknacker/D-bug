@@ -1,4 +1,4 @@
-import type {CreateTeamProps} from "../../../shared/types/team/team.ts"
+import type {CreateTeamRequestProps} from "../../../shared/types/team/team.ts"
 import express from "express"
 import prisma from "../db/prisma"
 import { PrismaClient } from "../../generated/prisma/client.js";
@@ -9,7 +9,7 @@ class TeamService{
         this.prisma = prisma;
     }
 
-    async createTeam(data: CreateTeamProps){
+    async createTeam(data: CreateTeamRequestProps){
         /* This function creates a team using the "name" and "description" props */
         return await this.prisma.team.create({data});
 

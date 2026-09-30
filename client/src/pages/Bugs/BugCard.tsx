@@ -5,8 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../../@/components/ui/av
 import { Link } from "react-router-dom"
 import { CircleAlert, Flag, Info, MessageCircleMore, OctagonAlert, Paperclip,  TriangleAlert } from "lucide-react"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../@/components/ui/tooltip"
+import "./BugBoard.css"
 
-const BugCard = ({bug}: BugCardProps): React.ReactNode => {
+const BugCard = ({bug, setDraggedCard}: BugCardProps): React.ReactNode => {
 
   const generateAvatarFallback = (name: string): string => {
 
@@ -22,8 +23,19 @@ const BugCard = ({bug}: BugCardProps): React.ReactNode => {
     return firstName + " " + lastName
   }
 
+  /* DRAG  */
+
+  const handleDragStart = (e) => {
+    e.preventDefault()
+    setDraggedCard(bug)
+  }
+
   return (
-    <div className="bug-card">
+    <div 
+    draggable 
+    className="bug-card"
+    onDragStart={handleDragStart}
+    >
 
         {/** CARD HEADER **/}
         <header className="card-header">

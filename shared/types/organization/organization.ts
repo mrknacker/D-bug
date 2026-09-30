@@ -5,7 +5,8 @@ import type { Project } from "../project/project"
 export interface Organization{
     id: string;
     name: string;
-    logoURL?: string;
+    description?: string;
+    logo?: File | null;
     owner: User;
     isActive: boolean;
     projects?: Project[] | null;
@@ -14,5 +15,5 @@ export interface Organization{
     updatedAt: string;
 }
 
-export type CreateOrganization = Pick<Organization, "name" | "logoURL">
+export type CreateOrganizationForm = Pick<Organization, "name" | "description" | "logo">
 

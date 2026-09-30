@@ -55,8 +55,10 @@
   /* ---------- Brand / Actions ---------- */
 
   --primary: #22d6ae;
+  --primary-message: #18B894;
   --primary-hover: #22d6ae;
   --primary-active: #12ae8d;
+  --primary-dark: rgba(25, 199, 162, 0.82);
 
   --primary-soft: rgba(25, 199, 162, 0.12);
   --primary-glow: rgba(25, 199, 162, 0.20);
@@ -68,7 +70,7 @@
   --text-secondary-dark: #777e7d;
   --text-tertiary: #707776;
   --text-disabled: #4d5352;
-
+  --text-disabled-dark: #454949;
   --text-on-primary: #00110c;
 
   /* ---------- CTA --------------*/
@@ -154,6 +156,7 @@
   --assigned-soft: rgba(167, 139, 250, 0.82);
   --assigned-hover-text: #F5F3FF;
 
+  --mention-dark: #818CF8;
   --mention: #38bdf8;
   --mention-soft: rgba(56, 189, 248, 0.12);
 
@@ -203,7 +206,18 @@
     clamp(0.75rem, 1vw, 1.25rem);
 
   --padding-sm:clamp(0.65rem, 0.45rem + 0.25vw, 1rem);
-
+  --padding-xl:   clamp(2rem, 4vw, 4rem);
+  --padding-2xl:  clamp(2rem, 5vw, 5rem);
+  --padding-3xl:  clamp(3rem, 5vw, 5rem);
+  --padding-4xl:  clamp(3rem, 6vw, 6rem);
+  --padding-5xl:  clamp(4rem, 8vw, 8rem);
+  --padding-6xl:  clamp(5rem, 8vw, 8rem);
+  --padding-7xl:  clamp(5rem, 10vw, 10rem);
+  --padding-8xl:  clamp(6rem, 10vw, 10rem);
+  --padding-9xl:  clamp(6rem, 12vw, 12rem);
+  --padding-10xl: clamp(8rem, 12vw, 12rem);
+  --padding-11xl: clamp(8rem, 15vw, 16rem);
+  --padding-12xl: clamp(10rem, 18vw, 20rem);
 
   --gap-xs:
     clamp(0.25rem, 0.2rem + 0.1vw, 0.5rem);
@@ -440,23 +454,7 @@ body {
   font-size: var(--font-md);
   line-height: var(--line-normal);
 
-  background:
-    radial-gradient(
-      ellipse 55% 45% at 100% 0%,
-      var(--red-glow),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 45% 40% at 0% 50%,
-      var(--teal-glow),
-      transparent 50%
-    ),
-    linear-gradient(
-      135deg,
-      #0b0d0e 0%,
-      #0d0f10 45%,
-      #0b0d0e 100%
-    );
+
 
   background-attachment: fixed;
   overflow-x: clip;

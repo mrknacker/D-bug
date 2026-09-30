@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 80%;
+
     background: radial-gradient(
             ellipse at top left,
             #27272a 0%,
@@ -36,13 +36,12 @@
 }
 
 .create-form{
+    
     justify-content: space-between;
     display: flex;
     height: 100%;
     flex-direction: column;
-    gap: var(--gap-xl);
-
-
+    gap: var(--gap-md);
 }
 
 
@@ -74,31 +73,66 @@
 .form-input{
     font-size: var(--font-ms);
     color: var(--text-primary);
-    border-radius: 3px;
-    border: 1px solid var(--border-strong);
+    border-radius: 7px;
+    border: 1px solid rgba(251, 218, 218, 0.11);
 }
 
+.file-input{
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.175);
+    font-size: var(--font-ms);
+    border-radius: 3px;
+}
+
+.file-input .left{
+ padding: var(--space-1) var(--space-5);
+color: var(--text-primary);
+}
+
+.file-input .right{
+padding: var(--space-1) var(--space-3);
+    color: var(--text-secondary);
+   
+}
 
 
 .label-input-group{
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xs); 
+    gap: var(--gap-sm); 
 }
 
 .input-error{
     color: var(--destructive);
     font-size: var(--text-xs);
     padding-inline: var(--space-2);
+
 }
 
 
 .input-info{
-    color: var(--info);
+    color: var(--text-tertiary);
     font-size: var(--text-xs);
     padding-inline: var(--space-2);
     padding-block: var(--space-2);
     align-self: end;
+}
+
+.team-icon{
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: var(--space-1);
+}
+
+.icon-container{
+    padding: var(--space-3);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    color: var(--text-primary);
+    height: 100%;
+    width: 100%;
+    gap: var(--gap-sm);
 }
 
 /* BUTTONS   */
@@ -109,10 +143,32 @@
     display: flex;
 }
 
+.show-icon-btn{
+    padding: var(--space-1) var(--space-3) ;
+    color: var(--text-primary);
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-xs);
+    border-radius: 5px;
+    border: 1px solid var(--text-disabled);
+    font-size: var(--font-ms);
+    display: flex;
+    background-color: var(--border-strong);
+
+}
+
+.team-icon{
+    padding: var(--space-1);
+}
+
+.team-icon:hover, .team-icon:focus{
+    background-color: var(--text-disabled-dark);
+}
+
 .submit-btn{
         white-space: nowrap;
         padding: var(--space-2) var(--space-5); 
-        color: var(--primary);
+        color: var(--primary-active);
         font-weight: 600;
         font-size: var(--font-ms);
         border-radius: 50px; 
@@ -141,12 +197,11 @@
         font-size: var(--font-ms);
         border-radius: 50px; 
 
-          transition:
+        transition:
         background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
         color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
         border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-        
+        box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1); 
 }
 
 
@@ -154,12 +209,49 @@
     background-color: var(--destructive);
     transition: all 0.4s ease-in-out;
     color: white;
-        border-color: var(--destructive);
+    border-color: var(--destructive);
+}
+
+.preview-image-btn{
+    color: var(--text-on-primary);
+    font-size: var(--font-ms);
+    padding-inline: var(--space-2);
+    background-color: var(--mention-dark);
+    border-radius: 2px;
+    display: flex;
+}
+
+.preview-image-btn:hover{
+    color: var(--mention-dark);
+    background-color: var(--text-on-primary);
 }
 
 
-
 @media(max-width:500px){
+    .create-form{
+    justify-content: space-between;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: var(--gap-md);
+}
+
+.file-input .left{
+ padding: var(--space-1) var(--space-3);
+ font-size: var(--font-xs);
+
+}
+
+.file-input .right{
+padding: var(--space-1) var(--space-3);
+ font-size: var(--font-xs);
+   
+}
+
+    .show-icon-btn{
+        padding: var(--space-1) var(--space-3);
+        font-size: var(--font-xs);
+    }
 
     .input-info{
         font-size: var(--font-xs);
@@ -184,5 +276,11 @@
 
     .cancel-btn, .submit-btn{
         font-size: var(--font-ms);
+    }
+
+    .icon-container{
+    overflow-x: auto;
+    gap: var(--gap-md);
+    grid-template-columns: repeat(12, 1fr);
     }
 }

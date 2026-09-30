@@ -12,6 +12,8 @@
     "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions" : true,
+    "noEmit": true,
 
     "sourceMap": true,
     "skipLibCheck": true

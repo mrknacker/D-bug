@@ -1,31 +1,93 @@
+/* BUG BOARD  **/
 
+.bug-board{
+    grid-column: span 12;
 
-
-.bug-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr ));
-    gap: var(--gap-md);
-    width: 100%;
-    justify-content: center;
-
-
+    display: flex;
+    flex-direction: column;
+    
 }
 
+.bugboard-container{
+    padding-block: var(--padding-card);
+    grid-template-columns: repeat(4, minmax(0,1fr));
+    display: grid;
+    height: 100%;
+
+    gap: var(--gap-md);
+}
+
+.bugboard-column{
+    background-color: var(--text-disabled-dark);
+    border-radius: 18px;
+    align-items: start;
+    overflow-y: scroll;
+    height: auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xs);
+}
+
+.bugboard-column.hover-over{
+    scale: 1.10;
+    transform: translateY(-5px);
+    border: 5px solid red;
+}
+
+.bugboard-column-header{
+
+    height: clamp(3rem, 4vw, 6rem);
+    display: flex;
+    justify-content: space-between;
+    padding: var(--padding-sm);
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--text-disabled-dark);
+    width: 100%;
+    
+}
+
+.bugboard-column-title{
+    font-size: var(--font-xl);
+    font-weight: 600;
+}
+
+.bugcard-container{
+   padding-inline: var(--padding-sm);
+   padding-block: var(--space-4);
+    width: 100%;
+    gap: var(--gap-xs);
+    display: grid;
+    align-items: start;
+}
+
+.bugcount{
+   
+    display: flex;
+    justify-content: center;
+    padding: var(--space-1);
+    border-radius: 100px;
+    height: 20px;
+    width:  20px;
+    text-align: center;
+    color: var(--text-on-primary);
+    font-size: var(--font-md);
+    font-weight: 600;
+    align-items: center;
+}
 
 .bug-card {
     width: 100%;
-    max-height: 25rem;
+    min-width: 0;
     padding: var(--padding-card);
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     
-    background:
-        linear-gradient(
-            10deg,
-            rgba(23, 0, 0, 0.285),
-            rgba(53, 50, 50, 0.19)
-        );
+    background-color: var(--surface);
 
     border: 1px solid rgba(255, 240, 240, 0.12);
     border-radius: 10px;
@@ -34,9 +96,9 @@
         0 4px 20px rgba(0, 0, 0, 0.35),
         0 0 20px rgba(220, 38, 38, 0.04);
 
-    position: relative;
     overflow: hidden;
-    gap: var(--gap-lg)
+    gap: var(--gap-lg);
+    cursor: grab;
 }
 
 .bug-card main p{
@@ -48,11 +110,6 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-        circle at 0% 0%,
-        rgba(239, 68, 68, 0.12),
-        transparent 10%
-    );
     pointer-events: none;
 }
 
@@ -71,7 +128,6 @@
     width: 100%;
     font-size: var(--font-xs);  
     gap: var(--gap-xs)
-
 }
 
 
@@ -81,6 +137,9 @@
     color: var(--text-primary);
     font-weight: 600;
     white-space: normal;
+    height: calc(1.5em * 2);
+    line-height: 1.5rem;
+
 }
 
 /****   BUG STATUS  ****/
@@ -274,3 +333,52 @@
     display: flex;
     gap: var(--gap-xs);}
     
+@media(max-width: 800px){
+    
+    .bugboard-container{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+
+@media(max-width: 450px){
+
+
+    .bugboard-container{
+        grid-template-rows: repeat(4, 1fr);
+        display: grid;
+        grid-template-columns: 1fr;
+
+    }
+
+    .bugcard-container{
+        display: grid;
+        grid-auto-flow: column;
+        overflow-x: auto;
+        grid-auto-columns: minmax(15rem, 1fr);
+    }
+
+
+
+    .board-section-header{
+        height: clamp(3rem, 5vw, 10rem);
+   
+        
+    }
+    .board-section-title{
+    font-size: var(--font-lg);
+    }
+
+
+
+    .bugcount{
+    height: 18px;
+    width:  18px;
+    text-align: center;
+    color: var(--background);
+    font-size: var(--font-ms);
+    font-weight: 600;
+    align-items: center;
+}
+}
