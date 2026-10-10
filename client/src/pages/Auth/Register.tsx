@@ -13,10 +13,11 @@ import { Input } from '../../../@/components/ui/input'
 import { Separator } from '../../../@/components/ui/separator'
 import { Link, useNavigate } from 'react-router-dom'
 import { Copy, LoaderCircle, UserPlus } from 'lucide-react'
-import { createUser } from '@/api/user'
+import { registerUser } from '@/api/auth'
 import type { CreateNewUser } from '../../../../shared/types/user/user'
 import type { FormStatus } from '../types/form'
 import {toast} from "sonner"
+import { loginWithGithub } from '@/api/oauth'
 
 const Register = () => {
 
@@ -88,7 +89,7 @@ const Register = () => {
       return;
     }
 
-    const user = await createUser(formData)
+    const user = await registerUser(formData)
     setFormStatus("success")
     
     navigate("/auth/sign-in")
@@ -111,7 +112,8 @@ const Register = () => {
       <BasicNavbar/>
 
       <div className='form-container'>
-        <Card  className="auth-form  max-w-md min-w-0">
+
+        <Card  className="auth-form  max-w-md min-w-0 ">
         
           <CardHeader className='auth-form-header'>
 
@@ -125,18 +127,18 @@ const Register = () => {
             </div>
 
             <div className='oauth-btn-container'>
-              <button className='oauth-btn '>
-                <svg xmlns="http://www.w3.org/2000/svg" height={16} width={16} fill="currentColor" className="bi bi-google" viewBox="0 0 16 16">
+              <button className='oauth-btn'>
+                <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" className="auth-btn-icon" viewBox="0 0 16 16">
                   <path d="M15.545 6.558a9.4 9.4 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.7 7.7 0 0 1 5.352 2.082l-2.284 2.284A4.35 4.35 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.8 4.8 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.7 3.7 0 0 0 1.599-2.431H8v-3.08z"/>
                 </svg>
-                Continue with Google
+                <span>Google</span>
               </button>
 
-              <button className='oauth-btn'>
-                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" id="Github-Logo-2--Streamline-Logos" 
-            height={18} width={18} ><desc>{"\n    Github Logo 2 Streamline Icon: https://streamlinehq.com\n  "}</desc><path 
+              <button className='oauth-btn'  onClick={loginWithGithub}>
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" id="Github-Logo-2--Streamline-Logos" className='auth-btn-icon'
+             ><desc>{"\n    Github Logo 2 Streamline Icon: https://streamlinehq.com\n  "}</desc><path 
             fill="currentColor" d="M11.996 1.284a10.986 10.986 0 0 0 -3.472 21.412c0.548 0.095 0.722 -0.227 0.722 -0.517 0 -0.263 0.006 -0.991 0 -1.91 -3.057 0.662 -3.688 -1.448 -3.688 -1.448a2.907 2.907 0 0 0 -1.22 -1.607c-0.997 -0.682 0.075 -0.669 0.075 -0.669a2.307 2.307 0 0 1 1.683 1.131 2.34 2.34 0 0 0 3.197 0.914 2.34 2.34 0 0 1 0.697 -1.464c-2.439 -0.279 -5.004 -1.22 -5.004 -5.432a4.248 4.248 0 0 1 1.132 -2.948 3.942 3.942 0 0 1 0.107 -2.907s0.924 -0.295 3.02 1.128a10.402 10.402 0 0 1 5.503 0c2.102 -1.422 3.018 -1.128 3.018 -1.128 0.405 0.92 0.444 1.96 0.109 2.907a4.243 4.243 0 0 1 1.13 2.95c0 4.223 -2.569 5.15 -5.016 5.42a2.604 2.604 0 0 1 0.752 2.026v3.041c0 0.294 0.177 0.619 0.735 0.512a10.986 10.986 0 0 0 -3.48 -21.411Z" strokeWidth={1} /></svg>
-                Continue with Github
+               <span>Github</span>
               </button>
 
             </div>
@@ -144,10 +146,8 @@ const Register = () => {
 
             <div className='justify-center flex relative p-4'>
               <Separator className={`separator`} />
-              <p className='flex justify-center rounded-full bg-[var(--background)] text-[var(--text-secondary)] absolute p-2 w-8 h-8 top-0'>or</p>
+              <p className='flex text-xs justify-center rounded-full bg-[var(--background)] text-[var(--text-secondary)] absolute p-2  top-0'>Or register with</p>
             </div>
-
-            <p className='form-input-label self-center'>Register with email</p>
             
             <form onSubmit={handleFormSubmit} >
           <CardContent  className='auth-form-input-group'>
@@ -237,7 +237,7 @@ const Register = () => {
             className='auth-submit-btn flex items-center gap-[var(--gap-sm)]'
             
             >
-              {formStatus === "submitted" ? <LoaderCircle size={18} className='animate-spin'/> : <UserPlus size={18}/> }
+              {formStatus === "submitted" ? <LoaderCircle  className='animate-spin auth-btn-icon'/> : <UserPlus  className='auth-btn-icon'/> }
               {formStatus === "submitted" ? "Creating your account" : "Create account" }
             </button>
 
